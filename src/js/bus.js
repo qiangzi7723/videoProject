@@ -3,7 +3,8 @@ export default {
 		_first:false,
 		_second:false,
 		_third:false,
-		_ended:false
+		_ended:false,
+		_canSwipe:false,
 	},
 	on(type,fn){
 		$(document).on(type,fn);

@@ -2,6 +2,7 @@ import { fadeIn } from './util.js';
 import Font from './font.js';
 import $bus from './bus.js';
 import Video from './video.js';
+import Canvas from './canvas.js';
 import config from './config.js';
 
 export default class {
@@ -10,6 +11,7 @@ export default class {
         this.preload();
         setTimeout(()=>{
             $bus.emit('fontAnimation');
+            const canvas=new Canvas();
         },200);
     }
     init() {
@@ -19,7 +21,7 @@ export default class {
     }
     preload() {
         this.queue.loadManifest([{
-            src: `${config.baseUrl}/video/yami.mp4`,
+            src: `${config.baseUrl}/video/yami.mp4?v=1`,
             type: createjs.Types.VIDEO
         }, {
             src: `${config.baseUrl}/audio/BGM.mp3`,

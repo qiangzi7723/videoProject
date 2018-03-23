@@ -722,7 +722,7 @@ function gd(t) {
 function gs() {
   return "24haowan";
 }
-},{}],34:[function(require,module,exports) {
+},{}],29:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -744,7 +744,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61501' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '63509' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -845,5 +845,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[34,2])
+},{}]},{},[29,2])
 //# sourceMappingURL=/dist/f50984c3f309a92c2be7b45d4a17df08.map

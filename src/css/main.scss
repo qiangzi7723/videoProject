@@ -75,10 +75,14 @@
             @extend .bg-cover;
             background-image:url('../assets/bg-rgb.png');
             z-index:3;
+            opacity:0;
+            display:none;
         }
         &__canvas{
             position:absolute;
             z-index:4;
+            opacity:0;
+            display:none;
         }
         &__circle{
         	display:none;
@@ -101,6 +105,17 @@
         	@extend .bg-contain;
         	background-image:url('../assets/bottle.png');
         	animation: 1.5s flash infinite;
+        }
+        &__knock{
+            display:none;
+            width:tr(200);
+            height:tr(400);
+            position:absolute;
+            bottom:vh(280);
+            right:tr(180);
+            @extend .bg-contain;
+            background-image:url('../assets/knock.png');
+            animation: 1.5s flash infinite;
         }
     }
     &__ending {
@@ -160,6 +175,14 @@
             right: tr(71);
             background-image: url('../assets/share.png');
         }
+    }
+    .canvasIn {
+        opacity: 1;
+        transition: opacity 2s ease-in-out;
+    }
+    .canvasOut{
+        opacity: 0;
+        transition: all .5s ease-in-out;
     }
     .fadeIn {
         opacity: 1;

@@ -13,8 +13,12 @@ export default class {
     bindEvent() {
         this.circle = $('.page__playing__circle');
         this.bottle = $('.page__playing__bottle');
-        this._addEvent([this.circle, this.bottle]);
+        this.knock = $('.page__playing__knock');
+        this._addEvent([this.circle, this.bottle,this.knock]);
         $bus.on('replayVideo',this.replayVideo.bind(this));
+        $bus.on('videoPlay',()=>{
+            this.video.play();
+        })
     }
     _addEvent(elms) {
         elms.forEach((elm) => {
@@ -26,30 +30,29 @@ export default class {
     }
 
     _first() {
-        if (Math.ceil(this.video.currentTime) == 62 && !$bus.status._first) {
+        if (this.video.currentTime >= 58.8 && this.video.currentTime<=65 && !$bus.status._first) {
             $bus.status._first = true;
             this.video.pause();
-            this.circle.show();
-            // new Canvas();
+            $bus.emit('showSwipe');
         }
     }
     _second() {
-        if (Math.ceil(this.video.currentTime) == 77 && !$bus.status._second) {
+        if (this.video.currentTime >= 70.5 && this.video.currentTime <= 75 && !$bus.status._second) {
             $bus.status._second = true;
             this.video.pause();
             this.bottle.show();
         }
     }
     _third() {
-        if (Math.ceil(this.video.currentTime) == 88 && !$bus.status._second) {
-            $bus.status._second = true;
+        if (this.video.currentTime >= 81.6 && this.video.currentTime <= 85 && !$bus.status._third) {
+            $bus.status._third = true;
             this.video.pause();
-            this.bottle.show();
+            this.knock.show();
         }
     }
     jumpTo() {
         setTimeout(() => {
-            this.video.currentTime = 58;
+            this.video.currentTime = 55;
         }, 1000)
     }
     play() {
@@ -60,12 +63,12 @@ export default class {
             // console.log(this.video.currentTime);
             this._first();
             this._second();
-            // this._third();
+            this._third();
             this.videoEnd();
-        }, 500)
+        }, 100)
     }
     videoEnd() {
-        if (this.video.currentTime > 131 && !$bus.status._ended) {
+        if (this.video.currentTime > 127 && !$bus.status._ended) {
             $bus.status._ended = true;
             fadeOut($('.page__playing'));
             $bus.emit('fontEndAnimation');
@@ -79,6 +82,7 @@ export default class {
     	this.video.currentTime=0;
     	this.video.play();
     	this.showVideo();
+        $bus.emit('reRender');
     }
     showVideo(){
           fadeIn($('.page__playing'));
