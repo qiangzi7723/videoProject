@@ -1,0 +1,199 @@
+@import './extend.scss';
+
+.page {
+    &__loading {
+    	z-index: 1;
+        @extend .fullpage;
+        @extend .bg-cover;
+        background-image: url('../assets/bg.png');
+        &__font {
+            position: absolute;
+            left: tr(214);
+            top: tr(179);
+        }
+        &__progress {
+            color: #e0fbfc;
+            font-size: tr(36);
+            letter-spacing: tr(10);
+            position: absolute;
+            @extend .c;
+            bottom: vh(150);
+            line-height: 0;
+        }
+        &__button {
+            color: #e0fbfc;
+            border: #e0fbfc solid tr(6);
+            font-size: tr(34);
+            position: absolute;
+            @extend .c;
+            bottom: vh(150);
+            line-height: 0;
+            height: tr(96);
+            width: tr(300);
+            text-align: center;
+            line-height: tr(96);
+            border-radius: tr(30);
+            opacity: 0;
+            &--flash{
+            	animation: 3s button-flash ease-in-out infinite;
+            }
+        }
+        &__logo{
+            width:tr(171);
+            height:tr(72);
+            @extend .c;
+            bottom:vh(38);
+            background-image:url('../assets/loading-logo.png');
+            @extend .bg-contain;
+        }
+    }
+    .common-font {
+        position: absolute;
+        @extend .bg-contain;
+        width: 30vw;
+        height: 30vh;
+        opacity: 0;
+        // transition: all 1s linear;
+        transition: all .4s linear;
+    }
+    .common-font-show {
+        opacity: 1;
+    }
+    &__playing {
+    	z-index:2;
+        @extend .fullpage;
+        opacity:0;
+        display: none;
+        #video {
+            @extend .fullpage;
+            background-size: cover;
+            object-fit: cover;
+            object-position: top center;
+        }
+        &__back{
+            @extend .fullpage;
+            @extend .bg-cover;
+            background-image:url('../assets/bg-rgb.png');
+            z-index:3;
+        }
+        &__canvas{
+            position:absolute;
+            z-index:4;
+        }
+        &__circle{
+        	display:none;
+        	width:tr(200);
+        	height:tr(200);
+        	position:absolute;
+        	@extend .c;
+        	bottom:vh(30);
+        	@extend .bg-contain;
+        	background-image:url('../assets/circle.png');
+        	animation: 1.5s flash infinite;
+        }
+        &__bottle{
+        	display:none;
+        	width:tr(200);
+        	height:tr(200);
+        	position:absolute;
+        	bottom:vh(30);
+        	right:tr(20);
+        	@extend .bg-contain;
+        	background-image:url('../assets/bottle.png');
+        	animation: 1.5s flash infinite;
+        }
+    }
+    &__ending {
+    	z-index:1;
+        display: none;
+        @extend .fullpage;
+        @extend .bg-cover;
+        background-image: url('../assets/bg.png');
+        &__logo{
+            width:tr(250);
+            height:tr(140);
+            @extend .c;
+            top:vh(30);
+            @extend .bg-contain;
+            background-image:url('../assets/end-logo.png');
+        }
+        &__font {
+            position: absolute;
+            left: tr(83);
+            top: tr(346);
+        }
+        .common-button {
+            color: #e0fbfc;
+            font-size: tr(34);
+            font-weight: bold;
+            width: tr(491);
+            height: tr(98);
+            text-align: center;
+            line-height: tr(98);
+            border: tr(6) solid #e0fbfc;
+            border-radius: tr(30);
+            @extend .c;
+            opacity: 0;
+            display: none;
+        }
+        &__again {
+            @extend .common-button;
+            bottom: vh(343);
+        }
+        &__share {
+            @extend .common-button;
+            bottom: vh(203);
+        }
+    }
+    &__share {
+    	z-index:2;
+        @extend .fullpage;
+        background-color: rgba(0, 0, 0, 0.3);
+        transform: translate3d(0, -100%, 0);
+        opacity: 0;
+        &__icon {
+            position: absolute;
+            @extend .bg-contain;
+            width: tr(122);
+            height: tr(157);
+            top: tr(59);
+            right: tr(71);
+            background-image: url('../assets/share.png');
+        }
+    }
+    .fadeIn {
+        opacity: 1;
+        transition: opacity 1s ease-in-out;
+    }
+    .fadeInDown {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        transition: all .5s ease-in-out;
+    }
+    .fadeOut {
+        opacity: 0;
+        transition: all .5s ease-in-out;
+    }
+	@keyframes flash{
+		0%{
+			opacity:0;
+		}
+		50%{
+			opacity:1;
+		}
+		100%{
+			opacity:0;
+		}
+	}
+	@keyframes button-flash{
+		0%{
+			opacity:1;
+		}
+		50%{
+			opacity:0.4;
+		}
+		100%{
+			opacity:1;
+		}
+	}
+}
