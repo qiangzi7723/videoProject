@@ -7,7 +7,7 @@ export default class {
         this.video = $('#video')[0];
         this.render();
         this.play();
-        // this.jumpTo();
+        this.jumpTo();
         this.bindEvent();
     }
     bindEvent() {
@@ -30,21 +30,21 @@ export default class {
     }
 
     _first() {
-        if (this.video.currentTime >= 58.8 && this.video.currentTime<=65 && !$bus.status._first) {
+        if (this.video.currentTime >= 51 && this.video.currentTime<=65 && !$bus.status._first) {
             $bus.status._first = true;
             this.video.pause();
             $bus.emit('showSwipe');
         }
     }
     _second() {
-        if (this.video.currentTime >= 70.5 && this.video.currentTime <= 75 && !$bus.status._second) {
+        if (this.video.currentTime >= 62.5 && this.video.currentTime <= 75 && !$bus.status._second) {
             $bus.status._second = true;
             this.video.pause();
             this.bottle.show();
         }
     }
     _third() {
-        if (this.video.currentTime >= 81.6 && this.video.currentTime <= 85 && !$bus.status._third) {
+        if (this.video.currentTime >= 73.5 && this.video.currentTime <= 85 && !$bus.status._third) {
             $bus.status._third = true;
             this.video.pause();
             this.knock.show();
@@ -52,7 +52,7 @@ export default class {
     }
     jumpTo() {
         setTimeout(() => {
-            this.video.currentTime = 55;
+            this.video.currentTime = 117;
         }, 1000)
     }
     play() {
@@ -68,7 +68,7 @@ export default class {
         }, 100)
     }
     videoEnd() {
-        if (this.video.currentTime > 127 && !$bus.status._ended) {
+        if (this.video.currentTime > 119 && !$bus.status._ended) {
             $bus.status._ended = true;
             fadeOut($('.page__playing'));
             $bus.emit('fontEndAnimation');
@@ -79,10 +79,17 @@ export default class {
     	$bus.status._second=false;
     	$bus.status._third=false;
     	$bus.status._ended=false;
+        $bus.status._hideDone=false;
+        $bus.status._firstTouch=false;
     	this.video.currentTime=0;
+        $bus.sound.instanceBgm.stop();
+        setTimeout(()=>{
+            $bus.sound.instanceBgm.play();
+        },3000)
     	this.video.play();
     	this.showVideo();
         $bus.emit('reRender');
+        // $bus.sound.instanceBgm.position=0;
     }
     showVideo(){
           fadeIn($('.page__playing'));

@@ -140,7 +140,7 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"./../assets/bg.png":[["1c5ff217c642d002adeba5f06fc3bdd2.png",15],15],"./../assets/loading-logo.png":[["e80786b199166ffa40aa8323ad925685.png",16],16],"./../assets/bg-rgb.png":17,"./../assets/circle.png":[["f60aacac8749c7de2961b2340d622632.png",18],18],"./../assets/bottle.png":[["d73261259bb5800a223f42663533f558.png",19],19],"./../assets/knock.png":[["2be4fd6bf26cff634aca1b879c4b6c54.png",34],34],"./../assets/end-logo.png":[["aa891502b39bf124280aa9802961298c.png",20],20],"./../assets/share.png":[["31f57a758308f16869341a118718f510.png",21],21],"_css_loader":14}],7:[function(require,module,exports) {
+},{"./../assets/bg.png":[["1c5ff217c642d002adeba5f06fc3bdd2.png",15],15],"./../assets/loading-logo.png":[["e80786b199166ffa40aa8323ad925685.png",16],16],"./../assets/bg-rgb.png":17,"./../assets/circle.png":[["f60aacac8749c7de2961b2340d622632.png",18],18],"./../assets/bottle.png":[["d73261259bb5800a223f42663533f558.png",19],19],"./../assets/knock.png":[["2be4fd6bf26cff634aca1b879c4b6c54.png",20],20],"./../assets/end-logo.png":[["aa891502b39bf124280aa9802961298c.png",21],21],"./../assets/share.png":[["31f57a758308f16869341a118718f510.png",22],22],"_css_loader":14}],7:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2488,8 +2488,11 @@ exports.default = {
 		_second: false,
 		_third: false,
 		_ended: false,
-		_canSwipe: false
+		_canSwipe: false,
+		_firstTouch: false,
+		_hideDone: false
 	},
+	sound: {},
 	on: function on(type, fn) {
 		$(document).on(type, fn);
 	},
@@ -2499,7 +2502,7 @@ exports.default = {
 };
 },{}],26:[function(require,module,exports) {
 module.exports="/dist/cb251d45f0f761b68784c932ec7fa007.png";
-},{}],30:[function(require,module,exports) {
+},{}],27:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2560,7 +2563,7 @@ function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
 }
 
 exports.default = drawImageProp;
-},{}],23:[function(require,module,exports) {
+},{}],24:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2614,12 +2617,24 @@ var _class = function () {
                 var y = e.targetTouches[0].pageY;
                 _this._drawCircle(x, y, _this.oldX, _this.oldY, 30, 10);
                 _this._open(function () {
+                    if (_bus2.default.status._hideDone) return;
+                    _bus2.default.status._hideDone = true;
                     _bus2.default.emit('lockSwipe');
                     _bus2.default.emit('hideSwipe');
                     _bus2.default.emit('videoPlay');
                 });
                 _this.oldX = x;
                 _this.oldY = y;
+                if (!_bus2.default.status._firstTouch) {
+                    _bus2.default.status._firstTouch = true;
+                    setTimeout(function () {
+                        if (_bus2.default.status._hideDone) return;
+                        _bus2.default.status._hideDone = true;
+                        _bus2.default.emit('lockSwipe');
+                        _bus2.default.emit('hideSwipe');
+                        _bus2.default.emit('videoPlay');
+                    }, 4000);
+                }
             });
             $(document).on('touchend', function () {
                 _this.oldX = -1;
@@ -2732,7 +2747,7 @@ var _class = function () {
                     num++;
                 }
             }
-            if (num >= dataLength * 0.8) {
+            if (num >= dataLength * 0.735) {
                 this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
                 cb();
             }
@@ -2743,7 +2758,7 @@ var _class = function () {
 }();
 
 exports.default = _class;
-},{"../assets/bg-bw.png":26,"../assets/bg-rgb.png":17,"./canvas-image-cover.js":30,"./bus.js":10,"./util.js":13}],22:[function(require,module,exports) {
+},{"../assets/bg-bw.png":26,"../assets/bg-rgb.png":17,"./canvas-image-cover.js":27,"./bus.js":10,"./util.js":13}],23:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2806,7 +2821,7 @@ var _class = function () {
     }, {
         key: '_first',
         value: function _first() {
-            if (this.video.currentTime >= 58.8 && this.video.currentTime <= 65 && !_bus2.default.status._first) {
+            if (this.video.currentTime >= 51 && this.video.currentTime <= 65 && !_bus2.default.status._first) {
                 _bus2.default.status._first = true;
                 this.video.pause();
                 _bus2.default.emit('showSwipe');
@@ -2815,7 +2830,7 @@ var _class = function () {
     }, {
         key: '_second',
         value: function _second() {
-            if (this.video.currentTime >= 70.5 && this.video.currentTime <= 75 && !_bus2.default.status._second) {
+            if (this.video.currentTime >= 62.5 && this.video.currentTime <= 75 && !_bus2.default.status._second) {
                 _bus2.default.status._second = true;
                 this.video.pause();
                 this.bottle.show();
@@ -2824,7 +2839,7 @@ var _class = function () {
     }, {
         key: '_third',
         value: function _third() {
-            if (this.video.currentTime >= 81.6 && this.video.currentTime <= 85 && !_bus2.default.status._third) {
+            if (this.video.currentTime >= 73.5 && this.video.currentTime <= 85 && !_bus2.default.status._third) {
                 _bus2.default.status._third = true;
                 this.video.pause();
                 this.knock.show();
@@ -2836,7 +2851,7 @@ var _class = function () {
             var _this3 = this;
 
             setTimeout(function () {
-                _this3.video.currentTime = 55;
+                _this3.video.currentTime = 117;
             }, 1000);
         }
     }, {
@@ -2860,7 +2875,7 @@ var _class = function () {
     }, {
         key: 'videoEnd',
         value: function videoEnd() {
-            if (this.video.currentTime > 127 && !_bus2.default.status._ended) {
+            if (this.video.currentTime > 119 && !_bus2.default.status._ended) {
                 _bus2.default.status._ended = true;
                 (0, _util.fadeOut)($('.page__playing'));
                 _bus2.default.emit('fontEndAnimation');
@@ -2873,10 +2888,17 @@ var _class = function () {
             _bus2.default.status._second = false;
             _bus2.default.status._third = false;
             _bus2.default.status._ended = false;
+            _bus2.default.status._hideDone = false;
+            _bus2.default.status._firstTouch = false;
             this.video.currentTime = 0;
+            _bus2.default.sound.instanceBgm.stop();
+            setTimeout(function () {
+                _bus2.default.sound.instanceBgm.play();
+            }, 3000);
             this.video.play();
             this.showVideo();
             _bus2.default.emit('reRender');
+            // $bus.sound.instanceBgm.position=0;
         }
     }, {
         key: 'showVideo',
@@ -2889,7 +2911,7 @@ var _class = function () {
 }();
 
 exports.default = _class;
-},{"./bus.js":10,"./util.js":13,"./canvas.js":23}],11:[function(require,module,exports) {
+},{"./bus.js":10,"./util.js":13,"./canvas.js":24}],11:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2949,6 +2971,7 @@ var _class = function () {
         key: 'init',
         value: function init() {
             this.queue = new createjs.LoadQueue(true);
+            createjs.Sound.registerPlugins([createjs.HTMLAudioPlugin, createjs.FlashAudioPlugin]);
             createjs.Sound.alternateExtensions = ["mp3"];
             this.queue.installPlugin(createjs.Sound);
         }
@@ -2958,11 +2981,14 @@ var _class = function () {
             var _this = this;
 
             this.queue.loadManifest([{
-                src: _config2.default.baseUrl + '/video/yami.mp4?v=1',
+                src: _config2.default.baseUrl + '/video/yami.mp4?v=2',
                 type: createjs.Types.VIDEO
             }, {
-                src: _config2.default.baseUrl + '/audio/BGM.mp3',
+                src: _config2.default.baseUrl + '/audio/BGM (3).mp3?v=2',
                 id: 'bgm'
+            }, {
+                src: _config2.default.baseUrl + '/audio/knock.mp3?v=2',
+                id: 'knock'
             }]);
 
             var fileLoadHandle = function fileLoadHandle(e) {
@@ -2997,8 +3023,12 @@ var _class = function () {
                     $('.page__loading').hide();
                     $('.page__ending').show();
                 });
-                // createjs.Sound.play("bgm");
+                _bus2.default.sound.instanceBgm = createjs.Sound.play("bgm");
+                _bus2.default.sound.instanceBgm.loop = 20;
                 var video = new _video2.default();
+                $(document).on('tap', function () {
+                    // $bus.sound.instanceBgm.position=0;
+                });
             });
         }
     }]);
@@ -3007,7 +3037,7 @@ var _class = function () {
 }();
 
 exports.default = _class;
-},{"./util.js":13,"./font.js":8,"./bus.js":10,"./video.js":22,"./canvas.js":23,"./config.js":11}],12:[function(require,module,exports) {
+},{"./util.js":13,"./font.js":8,"./bus.js":10,"./video.js":23,"./canvas.js":24,"./config.js":11}],12:[function(require,module,exports) {
 module.exports = {
     "loading": [
     {
@@ -3329,7 +3359,7 @@ $('.page__ending__again').on('tap', function () {
 
 // new vconsole();
 new _preload2.default();
-},{"../css/main.scss":6,"./rem.js":7,"./font.js":8,"vconsole":28,"../../lib/preload.min.js":4,"../../lib/soundjs.min.js":5,"./preload.js":9,"./bus.js":10,"./config.js":11,"../config/font.json":12,"./util.js":13}],35:[function(require,module,exports) {
+},{"../css/main.scss":6,"./rem.js":7,"./font.js":8,"vconsole":28,"../../lib/preload.min.js":4,"../../lib/soundjs.min.js":5,"./preload.js":9,"./bus.js":10,"./config.js":11,"../config/font.json":12,"./util.js":13}],33:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -3351,7 +3381,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '63509' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '63232' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -3452,5 +3482,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[35,3])
+},{}]},{},[33,3])
 //# sourceMappingURL=/dist/124b57fa27b5e6a559c32cf2b48491c9.map

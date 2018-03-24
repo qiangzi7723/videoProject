@@ -54,7 +54,7 @@
         height: 30vh;
         opacity: 0;
         // transition: all 1s linear;
-        transition: all .4s linear;
+        transition: all .2s linear;
     }
     .common-font-show {
         opacity: 1;
@@ -125,17 +125,17 @@
         @extend .bg-cover;
         background-image: url('../assets/bg.png');
         &__logo{
-            width:tr(250);
-            height:tr(140);
+            width:tr(171);
+            height:tr(72);
             @extend .c;
-            top:vh(30);
+            bottom:vh(88);
             @extend .bg-contain;
             background-image:url('../assets/end-logo.png');
         }
         &__font {
             position: absolute;
             left: tr(83);
-            top: tr(346);
+            top: tr(266);
         }
         .common-button {
             color: #e0fbfc;
@@ -153,11 +153,11 @@
         }
         &__again {
             @extend .common-button;
-            bottom: vh(343);
+            bottom: vh(443);
         }
         &__share {
             @extend .common-button;
-            bottom: vh(203);
+            bottom: vh(303);
         }
     }
     &__share {

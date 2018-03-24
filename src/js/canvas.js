@@ -20,12 +20,24 @@ export default class {
             const y = e.targetTouches[0].pageY;
             this._drawCircle(x, y, this.oldX, this.oldY, 30, 10);
             this._open(()=>{
+                if($bus.status._hideDone) return;
+                $bus.status._hideDone=true;
                 $bus.emit('lockSwipe');
                 $bus.emit('hideSwipe');
                 $bus.emit('videoPlay');
             });
             this.oldX = x;
             this.oldY = y;
+            if(!$bus.status._firstTouch){
+                $bus.status._firstTouch=true;
+                setTimeout(()=>{
+                    if($bus.status._hideDone) return;
+                    $bus.status._hideDone=true;
+                    $bus.emit('lockSwipe');
+                    $bus.emit('hideSwipe');
+                    $bus.emit('videoPlay');
+                },4000)
+            }
         })
         $(document).on('touchend', () => {
             this.oldX = -1;
@@ -118,7 +130,7 @@ export default class {
                 num++;
             }
         }
-        if (num >= dataLength * 0.8) {
+        if (num >= dataLength * 0.735) {
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
             cb();
         }

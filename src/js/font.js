@@ -41,7 +41,7 @@ export default class {
                     // 说明是最后一个文字的出现
                     $(children[i]).on('webkitTransitionEnd', () => {
                         this.config.cb && this.config.cb();
-                })
+                    })
                 }
             }
             $(children[0]).addClass('common-font-show');

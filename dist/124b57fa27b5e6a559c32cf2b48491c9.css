@@ -84,7 +84,7 @@ body {
   width: 30vw;
   height: 30vh;
   opacity: 0;
-  transition: all .4s linear; }
+  transition: all .2s linear; }
 
 .page .common-font-show {
   opacity: 1; }
@@ -144,14 +144,14 @@ body {
   display: none;
   background-image: url("1c5ff217c642d002adeba5f06fc3bdd2.png"); }
   .page__ending__logo {
-    width: 1.25rem;
-    height: 0.7rem;
-    top: 2.48756vh;
+    width: 0.855rem;
+    height: 0.36rem;
+    bottom: 7.29685vh;
     background-image: url("aa891502b39bf124280aa9802961298c.png"); }
   .page__ending__font {
     position: absolute;
     left: 0.415rem;
-    top: 1.73rem; }
+    top: 1.33rem; }
   .page__ending .common-button, .page__ending .page__ending__again, .page__ending .page__ending__share {
     color: #e0fbfc;
     font-size: 0.17rem;
@@ -165,9 +165,9 @@ body {
     opacity: 0;
     display: none; }
   .page__ending__again {
-    bottom: 28.44113vh; }
+    bottom: 36.733vh; }
   .page__ending__share {
-    bottom: 16.8325vh; }
+    bottom: 25.12438vh; }
 
 .page__share {
   z-index: 2;
