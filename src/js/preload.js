@@ -16,20 +16,11 @@ export default class {
     }
     init() {
         this.queue = new createjs.LoadQueue(true);
-         createjs.Sound.registerPlugins([createjs.HTMLAudioPlugin, createjs.FlashAudioPlugin]);
-        createjs.Sound.alternateExtensions = ["mp3"];
-        this.queue.installPlugin(createjs.Sound);
     }
     preload() {
         this.queue.loadManifest([{
-            src: `${config.baseUrl}/video/yami.mp4?v=2`,
+            src: `${config.baseUrl}/video/yami.mp4?v=3`,
             type: createjs.Types.VIDEO
-        }, {
-            src: `${config.baseUrl}/audio/BGM (3).mp3?v=2`,
-            id: 'bgm',
-        },{
-            src: `${config.baseUrl}/audio/knock.mp3?v=2`,
-            id: 'knock',
         }]);
 
         const fileLoadHandle = (e) => {
@@ -62,12 +53,7 @@ export default class {
                 $('.page__loading').hide();
                 $('.page__ending').show();
             });
-            $bus.sound.instanceBgm=createjs.Sound.play("bgm");
-            $bus.sound.instanceBgm.loop=20;
             const video=new Video();
-            $(document).on('tap',()=>{
-                // $bus.sound.instanceBgm.position=0;
-            })
         })
     }
 }

@@ -8,7 +8,6 @@ export default {
 		_firstTouch:false,
 		_hideDone:false
 	},
-	sound:{},
 	on(type,fn){
 		$(document).on(type,fn);
 	},

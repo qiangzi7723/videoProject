@@ -4,12 +4,12 @@ import rem from './rem.js';
 import Font from './font.js';
 import vconsole from 'vconsole';
 import a from '../../lib/preload.min.js';
-import b from '../../lib/soundjs.min.js';
 import Preload from './preload.js';
 import $bus from './bus.js';
 import config from './config.js';
 import configJson from '../config/font.json';
 import { fadeIn, fadeOut } from './util.js';
+import wx from './sdk.js';
 
 $bus.font = new Font({
     fontBaseUrl: `${config.baseUrl}/assets/font-loading`,
@@ -50,3 +50,5 @@ $('.page__ending__again').on('tap',()=>{
 
 // new vconsole();
 new Preload();
+wx.getWxSignPackage(wx.configWx.bind(wx));
+wx.setWxShare();

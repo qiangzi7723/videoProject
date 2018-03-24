@@ -36,7 +36,7 @@ export default class {
                     $bus.emit('lockSwipe');
                     $bus.emit('hideSwipe');
                     $bus.emit('videoPlay');
-                },4000)
+                },8000)
             }
         })
         $(document).on('touchend', () => {
@@ -130,9 +130,12 @@ export default class {
                 num++;
             }
         }
-        if (num >= dataLength * 0.735) {
-            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-            cb();
+        if (num >= dataLength * 0.73) {
+            setTimeout(()=>{
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                cb();
+            },3000)
+
         }
     }
 }

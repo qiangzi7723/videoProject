@@ -7,7 +7,7 @@ export default class {
         this.video = $('#video')[0];
         this.render();
         this.play();
-        this.jumpTo();
+        // this.jumpTo();
         this.bindEvent();
     }
     bindEvent() {
@@ -30,7 +30,7 @@ export default class {
     }
 
     _first() {
-        if (this.video.currentTime >= 51 && this.video.currentTime<=65 && !$bus.status._first) {
+        if (this.video.currentTime >= 58.7 && this.video.currentTime<=65 && !$bus.status._first) {
             $bus.status._first = true;
             this.video.pause();
             $bus.emit('showSwipe');
@@ -52,7 +52,7 @@ export default class {
     }
     jumpTo() {
         setTimeout(() => {
-            this.video.currentTime = 117;
+            this.video.currentTime = 55;
         }, 1000)
     }
     play() {
@@ -62,13 +62,13 @@ export default class {
         setInterval(() => {
             // console.log(this.video.currentTime);
             this._first();
-            this._second();
-            this._third();
+            // this._second();
+            // this._third();
             this.videoEnd();
         }, 100)
     }
     videoEnd() {
-        if (this.video.currentTime > 119 && !$bus.status._ended) {
+        if (this.video.currentTime > 115 && !$bus.status._ended) {
             $bus.status._ended = true;
             fadeOut($('.page__playing'));
             $bus.emit('fontEndAnimation');
@@ -82,14 +82,9 @@ export default class {
         $bus.status._hideDone=false;
         $bus.status._firstTouch=false;
     	this.video.currentTime=0;
-        $bus.sound.instanceBgm.stop();
-        setTimeout(()=>{
-            $bus.sound.instanceBgm.play();
-        },3000)
     	this.video.play();
     	this.showVideo();
         $bus.emit('reRender');
-        // $bus.sound.instanceBgm.position=0;
     }
     showVideo(){
           fadeIn($('.page__playing'));
