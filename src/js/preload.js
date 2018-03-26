@@ -19,7 +19,7 @@ export default class {
     }
     preload() {
         this.queue.loadManifest([{
-            src: `${config.baseUrl}/video/yami.mp4?v=3`,
+            src: `${config.baseUrl}/video/yami.mp4?v=4`,
             type: createjs.Types.VIDEO
         }]);
 

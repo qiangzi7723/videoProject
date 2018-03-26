@@ -48,7 +48,7 @@ $('.page__ending__again').on('tap',()=>{
 	$bus.emit('replayVideo');
 })
 
-// new vconsole();
-new Preload();
 wx.getWxSignPackage(wx.configWx.bind(wx));
 wx.setWxShare();
+// new vconsole();
+new Preload();

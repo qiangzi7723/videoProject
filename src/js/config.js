@@ -1,3 +1,3 @@
 export default {
-	baseUrl: '//24haowan-cdn.shanyougame.com/dingzhi/yamibuy/static'
+	baseUrl: 'https://m.yamibuy.com/warm/static'
 }
